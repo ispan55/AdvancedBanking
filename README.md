@@ -26,19 +26,14 @@ Advance Banking is a complete rewrite of Exile's default money system. It separa
         - Keeps players from camping them
         - Forces players to travel to ATMs with their precious money
 - Minimal File Changes
-    - Client side file changes
+    - 3 Client side file changes
+    - 10 Server side file changes
 ---
 #### Server Owners:
 Advanced Banking is coded to make the transition from default Exile money system to Advanced Banking. No database wipes are required, as that it moves the players current Exile Money to their personal bank accounts. Even works with "10,000 starter money"!
-##### Variables
-* Server
-    * ExileMoney is removed
-    * ExileClientPlayerMoney == Player Wallet
-    * ExileBank == Player Personal Bank
-    * PlayerHasPendingInv [Not Yet Implemented]
-* Client
-    * ExileClientPlayerMoney == Clientside Player Wallet
-    * ExileClientBank == Clientside Player Personal Bank
+
+#### Changing ATMs
+Currently the ATMs are placed for Altis, and are controlled via AdvBanking_Server\code\AdvBanking_Server_PlaceATM.sqf. This output is from M3Editor and can easily be adapted to any map. If you would like to share your ATM placement, please pass the files to us and we will update the github. 
 ---
 ### Roadmap
 * Version 1: Initial release
@@ -50,7 +45,8 @@ Advanced Banking is coded to make the transition from default Exile money system
     * Bug fixes
 ---
 ### Installation
-There are two ways of installing Advanced Banking.
+There are two ways of installing Advanced Banking.<br>
+**BEFORE INSTALLING: BACK UP ALL MISSION FILES, SERVER FILES, AND DATABASE**
 
 If you haven't changed any of the following files, follow these instructions: [Here](https://github.com/WolfkillArcadia/AdvancedBanking/blob/master/FreshServerInstallation.md)<br><br>
 -- Server --
@@ -71,3 +67,24 @@ If you haven't changed any of the following files, follow these instructions: [H
 * ExileClient_gui_xm8_slide_players_onOpen.sqf
 
 If you **have** changed any of the above files, follow these instructions: [Here](https://github.com/WolfkillArcadia/AdvancedBanking/blob/master/ModdedServerInstallation.md)
+
+### Disclaimer
+Everything offered in this repository is offered with NO WARRANTY. We am not responsible for any damages these files may cause either that being physical, emotional, or anything in between. We am not responsible if these files run off with your wife or husband or happens to kill your dog. We do offer support for any bugs, features, or setup that we have added to this server/mission files. If you have any issues or have any questions, please comment on the Exile Forums post or open an issue on Github
+
+### Copyright
+Copyright (c) 2016 Shix and Wolfkillarcadia
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>
+
+Contact: mrshix1996@gmail.com or wolfkillarcadia@gmail.com
