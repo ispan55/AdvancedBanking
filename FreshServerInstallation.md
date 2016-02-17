@@ -28,8 +28,10 @@ Advanced Banking is split up into three parts: SQL/extDB2, Server side, and Clie
 3. In your init.sqf
     1. Add to the top
 
-            //Advance Banking by Shix and WolfkillArcadia
-            [] execVM "AdvancedBanking\AdvBanking_Client_Init.sqf";
+            if (hasInterface) then {
+                //Advance Banking by Shix and WolfkillArcadia
+                [] execVM "AdvancedBanking\AdvBanking_Client_Init.sqf";
+            };
 
 4. In your description.ext
     1. Add to the top
