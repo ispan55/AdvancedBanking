@@ -20,21 +20,23 @@ Advanced Banking is split up into three parts: SQL/extDB2, Server side, and Clie
 2. De-PBO your **exile_server.pbo**
 3. We need to edit 10 server files. Locate and edit each one.
 4. **ExileServer_object_player_createBambi.sqf**
-    1. Add below after `_clanName = (_accountData select 5);`
-            // Advanced Banking
-            private["_advBank","_playerUID"];
-            _playerUID = getPlayerUID _requestingPlayer;
-            _advBank = format["getStats:%1",_playerUID] call ExileServer_system_database_query_selectSingle;
-            _bambiPlayer setVariable ["ExileClientPlayerMoney", (_advBank select 1)];
-            _bambiPlayer setVariable ["ExileBank",(_advBank select 2)];
-            _bambiPlayer setVariable ["PlayerHasPendingInv",false];
-            // Advanced Banking
+    1. Add below after `_clanName = (_accountData select 5);
+    `
+                // Advanced Banking
+                private["_advBank","_playerUID"];
+                _playerUID = getPlayerUID _requestingPlayer;
+                _advBank = format["getStats:%1",_playerUID] call ExileServer_system_database_query_selectSingle;
+                _bambiPlayer setVariable ["ExileClientPlayerMoney", (_advBank select 1)];
+                _bambiPlayer setVariable ["ExileBank",(_advBank select 2)];
+                _bambiPlayer setVariable ["PlayerHasPendingInv",false];
+                // Advanced Banking
     2. Comment out `_bambiPlayer setVariable ["ExileMoney", (_accountData select 0)];` after `_bambiPlayer setName _name;`
     3. Under `_parachuteNetID`, change `str (_accountData select 0)` to `str (_advBank select 1)`
 5. **ExileServer_object_player_database_load.sqf**
     1. After `_player setName _name;`
         1. Comment out `_player setVariable ["ExileMoney", (_data select 38)];`
         2. Add underneath
+
                 // Advanced Banking
                 private["_advBank"];
                 _advBank = format["getStats:%1",_playerUID] call ExileServer_system_database_query_selectSingle;
@@ -48,6 +50,7 @@ Advanced Banking is split up into three parts: SQL/extDB2, Server side, and Clie
 7. **ExileServer_system_network_event_onPlayerConnected.sqf**
     1. After `format["startAccountSession:%1:%2", _uid, _name] call ExileServer_system_database_query_fireAndForget;` on line 21
         1. Add
+
                 // Advance Banking
         		_hasBankAccount = format["hasBankAccount:%1", _uid] call ExileServer_system_database_query_selectSingleField;
         		if (!_hasBankAccount) then {
@@ -61,15 +64,18 @@ Advanced Banking is split up into three parts: SQL/extDB2, Server side, and Clie
         		// Advance Banking
     2. After `format["createAccount:%1:%2", _uid, _name] call ExileServer_system_database_query_fireAndForget;`
         1. Add
+
                 // Advanced Banking
                 format["createBankAccount:%1:%2",_uid,_name] call ExileServer_system_database_query_fireAndForget;
                 // Advanced Banking
 8. **ExileServer_system_territory_network_payTerritoryProtectionMoneyRequest.sqf**
     1. Change `_playerPopTabs = _playerObject getVariable ["ExileMoney", 0];` on line 37 to `_playerPopTabs = _playerObject getVariable ["ExileClientPlayerMoney", 0];`
     2. Replace the following
+
             _playerObject setVariable ["ExileMoney", _playerPopTabs];
             format["setAccountMoney:%1:%2", _playerPopTabs, getPlayerUID _playerObject] call ExileServer_system_database_query_fireAndForget;
         With
+
                 // Advanced Banking
                 _playerObject setVariable ["ExileClientPlayerMoney", _playerPopTabs];
                 format["updateWallet:%1:%2", _playerPopTabs, getPlayerUID _playerObject] call ExileServer_system_database_query_fireAndForget;
@@ -77,9 +83,11 @@ Advanced Banking is split up into three parts: SQL/extDB2, Server side, and Clie
 9. **ExileServer_system_territory_network_purchaseTerritory.sqf**
     1. Change `_playerMoney = _player getVariable ["ExileMoney", 0];` on line 26 to `_playerMoney = _player getVariable ["ExileClientPlayerMoney", 0];`
     2. Replace
+
             format["setAccountMoney:%1:%2", _playerMoney, (getPlayerUID _player)] call ExileServer_system_database_query_fireAndForget;
             _player setVariable ["ExileMoney",_playerMoney];
         With
+
                 // Advance Banking
                 format["updateWallet:%1:%2", _playerMoney, (getPlayerUID _player)] call ExileServer_system_database_query_fireAndForget;
                 _player setVariable ["ExileClientPlayerMoney",_playerMoney];
@@ -88,9 +96,11 @@ Advanced Banking is split up into three parts: SQL/extDB2, Server side, and Clie
 10. **ExileServer_system_trading_network_purchaseItemRequest.sqf**
     1. Change `_playerMoney = _playerObject getVariable ["ExileMoney", 0];` on line 45 to `_playerMoney = _playerObject getVariable ["ExileClientPlayerMoney", 0];`
     2. Replace
+
             _playerObject setVariable ["ExileMoney", _playerMoney];
             format["setAccountMoney:%1:%2", _playerMoney, (getPlayerUID _playerObject)] call ExileServer_system_database_query_fireAndForget;
         With
+
                 // Advanced Banking
                 _playerObject setVariable ["ExileClientPlayerMoney", _playerMoney];
                 format["updateWallet:%1:%2", _playerMoney, (getPlayerUID _playerObject)] call ExileServer_system_database_query_fireAndForget;
@@ -98,9 +108,11 @@ Advanced Banking is split up into three parts: SQL/extDB2, Server side, and Clie
 11. **ExileServer_system_trading_network_purchaseVehicleRequest.sqf**
     1. Change `_playerMoney = _playerObject getVariable ["ExileMoney", 0];` on line 42 `_playerMoney = _playerObject getVariable ["ExileClientPlayerMoney", 0];`
     2. Replace
+
             _playerObject setVariable ["ExileMoney", _playerMoney];
             format["setAccountMoney:%1:%2", _playerMoney, (getPlayerUID _playerObject)] call ExileServer_system_database_query_fireAndForget;
         With
+
                 // Advance Banking
                 _playerObject setVariable ["ExileClientPlayerMoney", _playerMoney];
                 format["updateWallet:%1:%2", _playerMoney, (getPlayerUID _playerObject)] call ExileServer_system_database_query_fireAndForget;
@@ -108,9 +120,11 @@ Advanced Banking is split up into three parts: SQL/extDB2, Server side, and Clie
 12. **ExileServer_system_trading_network_purchaseVehicleSkinRequest.sqf**
     1. Change `_playerMoney = _playerObject getVariable ["ExileMoney", 0];` on line 57 to `_playerMoney = _playerObject getVariable ["ExileClientPlayerMoney", 0];`
     2. Replace
+
             _playerObject setVariable ["ExileMoney", _playerMoney];
             format["setAccountMoney:%1:%2", _playerMoney, (getPlayerUID _playerObject)] call ExileServer_system_database_query_fireAndForget;
         With
+
                 // Advanced Banking
                 _playerObject setVariable ["ExileClientPlayerMoney", _playerMoney];
                 format["updateWallet:%1:%2", _playerMoney, (getPlayerUID _playerObject)] call ExileServer_system_database_query_fireAndForget;
@@ -120,6 +134,7 @@ Advanced Banking is split up into three parts: SQL/extDB2, Server side, and Clie
     2. Change `_playerObject setVariable ["ExileMoney", _playerMoney];` on line 84 to `_playerObject setVariable ["ExileClientPlayerMoney", _playerMoney];`
     3. Replace `format["setAccountMoneyAndRespect:%1:%2:%3", _playerMoney, _playerRespect, (getPlayerUID _playerObject)] call ExileServer_system_database_query_fireAndForget;` on line 89
         with
+
                 format["updateWallet:%1:%2", _playerMoney, (getPlayerUID _playerObject)] call ExileServer_system_database_query_fireAndForget;
                 format["setAccountScore:%1:%2",_playerRespect,(getPlayerUID _playerObject)] call ExileServer_system_database_query_fireAndForget;    
 
@@ -128,6 +143,7 @@ Advanced Banking is split up into three parts: SQL/extDB2, Server side, and Clie
     2. Change `_playerObject setVariable ["ExileMoney", _playerMoney];` on line 56 to `_playerObject setVariable ["ExileClientPlayerMoney", _playerMoney];`
     3. Change `format["setAccountMoneyAndRespect:%1:%2:%3", _playerMoney, _playerRespect, (getPlayerUID _playerObject)] call ExileServer_system_database_query_fireAndForget;` on line 61
         with
+
                 format["setAccountScore",_playerRespect,(getPlayerUID _playerObject)] call ExileServer_system_database_query_fireAndForget;
                 format["updateWallet",_playerMoney,(getPlayerUID _playerObject)] call ExileServer_system_database_query_fireAndForget;
 15. You are all done!
@@ -147,8 +163,6 @@ Advanced Banking is split up into three parts: SQL/extDB2, Server side, and Clie
             //Advance Banking by Shix and WolfkillArcadia
             #include "AdvancedBanking\Dialog\AdvBanking_Client_Defines.hpp"
             #include "AdvancedBanking\Dialog\AdvBanking_Client_ATMDialog.hpp"
-
-
     2. Add at the bottom if you **don't** have RscTitles
 
             class RscTitles
@@ -158,13 +172,16 @@ Advanced Banking is split up into three parts: SQL/extDB2, Server side, and Clie
             };
     3. If you **do** have an RscTitles
         1. Add then inside the {}
+
                 //Advance Banking
                 #include "AdvancedBanking\Dialog\AdvBanking_Client_CreditCard.hpp"
     4. If you **don't** have infiSTAR
         1. Add the following to CfgRemoteExec
+
                 class AdvBanking_Client_ClientHandleIncomingMessage { allowedTargets=1; };
                 class AdvBanking_Server_HandleRequest { allowedTargets=2; };
            So it looks like this:
+
                 class CfgRemoteExec
                 {
                     class Functions
@@ -184,9 +201,11 @@ Advanced Banking is split up into three parts: SQL/extDB2, Server side, and Clie
 5. If you **do** have infiSTAR
     1. Open up CfgRemoteExec.hpp that came with your copy of infiSTAR
         11. Add the following to CfgRemoteExec
+
                 class AdvBanking_Client_ClientHandleIncomingMessage { allowedTargets=1; };
                 class AdvBanking_Server_HandleRequest { allowedTargets=2; };
            So it looks like this:
+
                 class CfgRemoteExec
                 {
                     class Functions
@@ -208,6 +227,7 @@ Advanced Banking is split up into three parts: SQL/extDB2, Server side, and Clie
 6. Open up **config.cpp**
     1. Locate `class CfgInteractionMenus`
     2. Add the following within the {} for `class CfgInteractionMenus`
+
             // Advance Money
             class MoneyPile
             {
@@ -248,10 +268,12 @@ Advanced Banking is split up into three parts: SQL/extDB2, Server side, and Clie
             // Advance Money
     3. Locate `class CfgExileCustomCode`
     4. Add the following inside the {} for `class CfgExileCustomCode`
+
                ExileClient_object_player_event_onPlayerKilled = "ClientOverrides\ExileClient_object_player_event_onPlayerKilled.sqf";
                ExileClient_gui_xm8_slide_apps_onOpen = "ClientOverrides\ExileClient_gui_xm8_slide_apps_onOpen.sqf";
                ExileClinet_gui_xm8_slide_players_onOpen = "ClientOverrides\ExileClient_gui_xm8_slide_players_onOpen.sqf";
        So it looks like this:
+
                class CfgExileCustomCode {
                    ExileClient_object_player_event_onPlayerKilled = "ClientOverrides\ExileClient_object_player_event_onPlayerKilled.sqf";
                    ExileClient_gui_xm8_slide_apps_onOpen = "ClientOverrides\ExileClient_gui_xm8_slide_apps_onOpen.sqf";

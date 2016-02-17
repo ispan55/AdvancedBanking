@@ -47,13 +47,16 @@ Advanced Banking is split up into three parts: SQL/extDB2, Server side, and Clie
             };
     3. If you **do** have an RscTitles
         1. Add then inside the {}
+
                 //Advance Banking
                 #include "AdvancedBanking\Dialog\AdvBanking_Client_CreditCard.hpp"
     4. If you **don't** have infiSTAR
         1. Add the following to CfgRemoteExec
+
                 class AdvBanking_Client_ClientHandleIncomingMessage { allowedTargets=1; };
                 class AdvBanking_Server_HandleRequest { allowedTargets=2; };
            So it looks like this:
+
                 class CfgRemoteExec
                 {
                     class Functions
@@ -73,9 +76,11 @@ Advanced Banking is split up into three parts: SQL/extDB2, Server side, and Clie
 5. If you **do** have infiSTAR
     1. Open up CfgRemoteExec.hpp that came with your copy of infiSTAR
         11. Add the following to CfgRemoteExec
+
                 class AdvBanking_Client_ClientHandleIncomingMessage { allowedTargets=1; };
                 class AdvBanking_Server_HandleRequest { allowedTargets=2; };
            So it looks like this:
+
                 class CfgRemoteExec
                 {
                     class Functions
@@ -97,6 +102,7 @@ Advanced Banking is split up into three parts: SQL/extDB2, Server side, and Clie
 6. Open up config.cpp
     1. Locate `class CfgInteractionMenus`
     2. Add the following within the {} for `class CfgInteractionMenus`
+
             // Advance Money
             class MoneyPile
             {
@@ -137,10 +143,12 @@ Advanced Banking is split up into three parts: SQL/extDB2, Server side, and Clie
             // Advance Money
      3. Locate `class CfgExileCustomCode`
      4. Add the following inside the {} for `class CfgExileCustomCode`
+
                 ExileClient_object_player_event_onPlayerKilled = "ClientOverrides\ExileClient_object_player_event_onPlayerKilled.sqf";
                 ExileClient_gui_xm8_slide_apps_onOpen = "ClientOverrides\ExileClient_gui_xm8_slide_apps_onOpen.sqf";
                 ExileClinet_gui_xm8_slide_players_onOpen = "ClientOverrides\ExileClient_gui_xm8_slide_players_onOpen.sqf";
         So it looks like this:
+
                 class CfgExileCustomCode {
                     ExileClient_object_player_event_onPlayerKilled = "ClientOverrides\ExileClient_object_player_event_onPlayerKilled.sqf";
 	                ExileClient_gui_xm8_slide_apps_onOpen = "ClientOverrides\ExileClient_gui_xm8_slide_apps_onOpen.sqf";
