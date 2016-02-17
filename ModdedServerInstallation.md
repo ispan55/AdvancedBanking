@@ -20,8 +20,8 @@ Advanced Banking is split up into three parts: SQL/extDB2, Server side, and Clie
 2. De-PBO your **exile_server.pbo**
 3. We need to edit 10 server files. Locate and edit each one.
 4. **ExileServer_object_player_createBambi.sqf**
-    1. Add below after `_clanName = (_accountData select 5);
-    `
+    1. Add below after `_clanName = (_accountData select 5);`
+    
                 // Advanced Banking
                 private["_advBank","_playerUID"];
                 _playerUID = getPlayerUID _requestingPlayer;
@@ -30,6 +30,7 @@ Advanced Banking is split up into three parts: SQL/extDB2, Server side, and Clie
                 _bambiPlayer setVariable ["ExileBank",(_advBank select 2)];
                 _bambiPlayer setVariable ["PlayerHasPendingInv",false];
                 // Advanced Banking
+
     2. Comment out `_bambiPlayer setVariable ["ExileMoney", (_accountData select 0)];` after `_bambiPlayer setName _name;`
     3. Under `_parachuteNetID`, change `str (_accountData select 0)` to `str (_advBank select 1)`
 5. **ExileServer_object_player_database_load.sqf**
