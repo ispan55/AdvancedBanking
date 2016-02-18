@@ -43,17 +43,14 @@ try
 		throw 4;
 	};
 	_playerMoney = _playerObject getVariable ["ExileClientPlayerMoney", 0];
-	diag_log Format ["GET PLAYER MONEY %1",_playerMoney];
 	if (_playerMoney < _salesPrice) then
 	{
 		throw 5;
 	};
 	_playerMoney = _playerMoney - _salesPrice;
-	diag_log Format ["Money with sales price taken %1",_playerMoney];
 
     // Advanced Banking
 	_playerObject setVariable ["ExileClientPlayerMoney", _playerMoney];
-	diag_log Format ["Re set money variable %1",_playerMoney];
 	format["updateWallet:%1:%2", _playerMoney, (getPlayerUID _playerObject)] call ExileServer_system_database_query_fireAndForget;
     // Advanced Banking
 
