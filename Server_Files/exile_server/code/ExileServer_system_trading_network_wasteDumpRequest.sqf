@@ -58,8 +58,8 @@ try
 	_playerRespect = _playerObject getVariable ["ExileScore", 0];
 	_playerRespect = floor (_playerRespect + _respectGain);
 	_playerObject setVariable ["ExileScore", _playerRespect];
-    format["setAccountScore",_playerRespect,(getPlayerUID _playerObject)] call ExileServer_system_database_query_fireAndForget;
-    format["updateWallet",_playerMoney,(getPlayerUID _playerObject)] call ExileServer_system_database_query_fireAndForget;
+	format["setAccountScore:%1:%2",_playerRespect,(getPlayerUID _playerObject)] call ExileServer_system_database_query_fireAndForget;
+    format["updateWallet:%1:%2",_playerMoney,(getPlayerUID _playerObject)] call ExileServer_system_database_query_fireAndForget;
 	[_sessionID, "wasteDumpResponse", [0, str _playerMoney, str _playerRespect]] call ExileServer_system_network_send_to;
 }
 catch
