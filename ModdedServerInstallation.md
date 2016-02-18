@@ -145,8 +145,8 @@ Advanced Banking is split up into three parts: SQL/extDB2, Server side, and Clie
     3. Change `format["setAccountMoneyAndRespect:%1:%2:%3", _playerMoney, _playerRespect, (getPlayerUID _playerObject)] call ExileServer_system_database_query_fireAndForget;` on line 61
         with
 
-                format["setAccountScore",_playerRespect,(getPlayerUID _playerObject)] call ExileServer_system_database_query_fireAndForget;
-                format["updateWallet",_playerMoney,(getPlayerUID _playerObject)] call ExileServer_system_database_query_fireAndForget;
+                format["setAccountScore:%1:%2",_playerRespect,(getPlayerUID _playerObject)] call ExileServer_system_database_query_fireAndForget;
+                format["updateWallet:%1:%2",_playerMoney,(getPlayerUID _playerObject)] call ExileServer_system_database_query_fireAndForget;
 15. You are all done!
 
 #### Client Side
@@ -159,7 +159,7 @@ Advanced Banking is split up into three parts: SQL/extDB2, Server side, and Clie
                 //Advance Banking by Shix and WolfkillArcadia
                 [] execVM "AdvancedBanking\AdvBanking_Client_Init.sqf";
             };
-            
+
 4. In your **description.ext**
     1. Add to the top
 
