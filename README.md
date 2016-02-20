@@ -28,7 +28,8 @@ Currently the ATMs are placed for Altis, and are controlled via AdvBanking_Serve
 
 ### Roadmap
 * Version 1: Initial release
-* Version 2:
+* Version 2: Re-write awesomeness!
+* Version 3:
     * Shared Banking
         * Another bank account
         * Invite other players to this account
