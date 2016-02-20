@@ -20,6 +20,7 @@ Advanced Banking is coded to make the transition from default Exile money system
 
 #### Changing ATMs
 Currently the ATMs are placed for Altis, and are controlled via AdvBanking_Server\code\ExileServer_banking_map_placeATM.sqf. This output is from M3Editor and can easily be adapted to any map. If you would like to share your ATM placement, please pass the files to us and we will update the github.
+
 ---
 ### Roadmap
 * Version 1: Initial release
