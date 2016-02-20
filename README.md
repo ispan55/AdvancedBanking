@@ -5,16 +5,16 @@ Advance Banking is a complete rewrite of Exile's default money system. It separa
 ---
 
 ### Features
-Brand new banking system
-Two different ways of storing money
-Personal bank, secure and untouchable
-Wallet, death is going to become rich
-Custom Prisoner ID cards when examining wallets
-Brand new XM8 that shows wallet, personal bank, and shared bank[SoonTM]
-Custom ATMs that are spread all over the map
-Deposit, withdrawal, or transfer money to other players
-Completely rewritten to use Exile's security
-Extra: Commands to let other scripts add and remove from players wallets
+* Brand new banking system
+* Two different ways of storing money
+* Personal bank, secure and untouchable
+* Wallet, death is going to become rich
+* Custom Prisoner ID cards when examining wallets
+* Brand new XM8 that shows wallet, personal bank, and shared bank[SoonTM]
+* Custom ATMs that are spread all over the map
+* Deposit, withdrawal, or transfer money to other players
+* Completely rewritten to use Exile's security
+* Extra: Commands to let other scripts add and remove from players wallets
 
 ---
 
