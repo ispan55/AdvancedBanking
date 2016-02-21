@@ -52,6 +52,7 @@ try
     // Advanced Banking
 	_playerObject setVariable ["ExilePurse", _playerMoney];
 	format["updateWallet:%1:%2", _playerMoney, (getPlayerUID _playerObject)] call ExileServer_system_database_query_fireAndForget;
+	if (ADVBANKING_SERVER_DEBUG) then {[format["%1 purchased an Item",_playerObject],"PurchaseItemRequest"] call ExileServer_banking_utils_diagLog;};
     // Advanced Banking
 
 	[_sessionID, "purchaseItemResponse", [0, str _playerMoney, _itemClassName, 1, _containerType, _containerNetID]] call ExileServer_system_network_send_to;

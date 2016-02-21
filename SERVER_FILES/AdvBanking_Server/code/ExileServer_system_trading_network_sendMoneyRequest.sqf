@@ -50,6 +50,7 @@ try
 	_receiverPlayerObject setVariable ["ExileBank", _receiverAccountBalance];
 	format["updateBank:%1:%2", _receiverAccountBalance, getPlayerUID _receiverPlayerObject] call ExileServer_system_database_query_fireAndForget;
 	[_receiverPlayerObject, "youWonTheLottery", [str _receiverAccountBalance, name _senderPlayerObject]] call ExileServer_system_network_send_to;
+	if (ADVBANKING_SERVER_DEBUG) then {[format["%1 sent %2 poptabs to %2",_playerObject,_amountToTransfer,_receiverPlayerObject],"SendMoneyRequest"] call ExileServer_banking_utils_diagLog;};
 }
 catch
 {

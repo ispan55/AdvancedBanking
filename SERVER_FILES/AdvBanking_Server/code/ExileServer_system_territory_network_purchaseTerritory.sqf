@@ -33,6 +33,7 @@ try
     // Advance Banking
 	format["updateWallet:%1:%2", _playerMoney, (getPlayerUID _player)] call ExileServer_system_database_query_fireAndForget;
 	_player setVariable ["ExilePurse",_playerMoney];
+	if (ADVBANKING_SERVER_DEBUG) then {[format["%1 purchased territory",_player],"PurchaseTerritory"] call ExileServer_banking_utils_diagLog;};
     // Advance Banking
 
 	[_sessionID, "purchaseTerritoryResponse" , [0]] call ExileServer_system_network_send_to;

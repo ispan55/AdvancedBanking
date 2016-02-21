@@ -13,12 +13,12 @@
     ["buyRequest",[str(AMOUNTTOREMOVE)]] call ExileClient_system_network_send;
 
 */
-
 _sessionID = _this select 0;
 _package = _this select 1;
 _amount = parseNumber(_package select 0);
 
 try {
+    if (ADVBANKING_SERVER_DEBUG) then {["Buy Request enacted","BuyRequest"] call ExileServer_banking_utils_diagLog;};
     _playerObject = _sessionID call ExileServer_system_session_getPlayerObject;
     if (isNull _playerObject) then
 	{

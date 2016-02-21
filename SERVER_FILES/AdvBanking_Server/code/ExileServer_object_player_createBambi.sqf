@@ -123,5 +123,6 @@ call ExileServer_system_network_send_to;
 	]
 ]
 call ExileServer_system_network_send_to;
+if (ADVBANKING_SERVER_DEBUG) then {["Processed Create Bambi with Advanced Banking","CreateBambi"] call ExileServer_banking_utils_diagLog;};
 [_sessionID, _bambiPlayer] call ExileServer_system_session_update;
 true

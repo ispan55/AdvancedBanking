@@ -18,6 +18,7 @@ _package = _this select 1;
 _worth = parseNumber(_package select 0);
 
 try {
+    if (ADVBANKING_SERVER_DEBUG) then {[format["Collection Request enacted. Package: %1",_package],"CollectionRequest"] call ExileServer_banking_utils_diagLog;};
     _playerObject = _sessionID call ExileServer_system_session_getPlayerObject;
     if (isNull _playerObject) then
 	{

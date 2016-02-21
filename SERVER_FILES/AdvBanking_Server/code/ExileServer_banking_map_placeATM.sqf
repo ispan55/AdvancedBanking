@@ -1,6 +1,6 @@
 /*
 
- 	Name: ExileServer_banking_network_buyRequest.sqf
+ 	Name: ExileServer_banking_map_placeATM.sqf
 
  	Description:
     Places ATMs on map.
@@ -48,3 +48,7 @@ _objects =
 	_marker setMarkerText "ATM";
 }
 forEach _objects;
+
+if (ADVBANKING_SERVER_DEBUG) then {
+	["ATMs have been placed","PlaceATM"] call ExileServer_banking_utils_diagLog;
+};

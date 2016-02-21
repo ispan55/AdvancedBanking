@@ -76,6 +76,7 @@ try
     // Advanced Banking
 	_playerObject setVariable ["ExilePurse", _playerMoney];
 	format["updateWallet:%1:%2", _playerMoney, (getPlayerUID _playerObject)] call ExileServer_system_database_query_fireAndForget;
+	if (ADVBANKING_SERVER_DEBUG) then {[format["%1 purchased a vehicle skin",_playerObject],"VehicleSkinRequest"] call ExileServer_banking_utils_diagLog;};
     // Advanced Banking
 
 	[_sessionID, "purchaseVehicleSkinResponse", [0, str _playerMoney]] call ExileServer_system_network_send_to;

@@ -64,6 +64,7 @@ try
 	_flagObject setVariable ["ExileTerritoryLastPayed", _currentTimestamp];
 	_flagObject call ExileServer_system_territory_maintenance_recalculateDueDate;
 	format["maintainTerritory:%1", _territoryDatabaseID] call ExileServer_system_database_query_fireAndForget;
+	if (ADVBANKING_SERVER_DEBUG) then {["Pay Territory Protection Enacted","PayTerritoryProtection"] call ExileServer_banking_utils_diagLog;};
 	[_sessionID, "payTerritoryProtectionMoneyResponse", [str _playerPopTabs, str _playerRespect]] call ExileServer_system_network_send_to;
 }
 catch
